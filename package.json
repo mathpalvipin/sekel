@@ -1,8 +1,8 @@
 {
+  "homepage": "http://mathpalvipin.github.io/sekel",
   "name": "sekel",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mathpalvipin.io/sekel",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.17.0",
@@ -18,8 +18,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "build": "react-scripts build ",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
