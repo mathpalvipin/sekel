@@ -5,11 +5,9 @@ import { removeFromCart } from "../store/productSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const productlist = useSelector((state) => {
-    console.log(state);
     return state.products.productlist;
   });
   const cart = useSelector((state) => {
-    console.log("cart ", state.products.cart);
     return state.products.cart;
   });
 
@@ -32,20 +30,20 @@ const Home = () => {
             <div className=" text-left">{p?.price} </div>
             <div className="flex flex-row justify-between  mt-auto">
               <NavLink
-                to={`/product/${p?.id-1}`}
+                to={`/product/${p?.id}`}
                 className="bg-black text-white px-2 py-1 rounded-lg shadow-md"
               >
                 Details
               </NavLink>
               <button
-                className={` text-white px-3  py-1 rounded-lg shadow-md  ${ cart.includes(p?.id)? "bg-red-600"  :" bg-yellow-400"}  `}
+                className={` text-white px-3  py-1 rounded-lg shadow-md  ${ cart.some(item => item.id === p?.id)? "bg-red-600"  :" bg-yellow-400"}  `}
                 onClick={
-                  !cart.includes(p?.id)
-                    ? () => dispatch(addToCart({ id: p?.id }))
-                    : () => dispatch(removeFromCart({ id: p?.id }))
+                  !cart.some(item => item.id === p?.id)
+                    ? () => dispatch(addToCart({ product: p }))
+                    : () => dispatch(removeFromCart({ product: p }))
                 }
               >
-                {cart.includes(p?.id) ? "Remove" : "Add"}
+                {  cart.some(item => item.id === p?.id)? "Remove" : "Add"}
               </button>
             </div>
           </div>

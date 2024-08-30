@@ -11,8 +11,7 @@ const Product = () => {
   const { id } = useParams();
   const productlist = useSelector((state) => state.products.productlist);
   const cart = useSelector((state) => state.products.cart);
-  const product = productlist[id];
-  console.log(id);
+  const product = productlist.find(p => p?.id === parseInt(id));
   return (
    <div className="flex flex-col justify-center items-center">
       <h1 className="text-3xl font-bold text-black ">Product List</h1>
@@ -30,15 +29,15 @@ const Product = () => {
          <NavLink to="/" className="bg-gray-950 text-white p-1 px-3 rounded-lg shadow-md">Back  </NavLink>
           <button
             className={` text-white px-3  py-1 rounded-lg shadow-md  ${
-              cart.includes(product?.id) ? "bg-red-600" : " bg-yellow-400"
+              cart.some(item => item.id === product?.id) ? "bg-red-600" : " bg-yellow-400"
             }  `}
             onClick={
-              !cart.includes(product?.id)
-                ? () => dispatch(addToCart({ id: product?.id }))
-                : () => dispatch(removeFromCart({ id: product?.id }))
+              !cart.some(item => item.id === product?.id)
+                ? () => dispatch(addToCart({ product: product }))
+                : () => dispatch(removeFromCart({ product: product}))
             }
           >
-            {cart.includes(product?.id) ? "Remove" : "Add"}
+            {  cart.some(item => item.id === product?.id) ? "Remove" : "Add"}
           </button>
         </div>
       </div>

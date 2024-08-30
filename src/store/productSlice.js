@@ -8,34 +8,36 @@ const productsSlice = createSlice({
        state.productlist = action.payload.productlist;
      },
      setCartList : function (state, action){
-      console.log("from local storage" ,action.payload.cart);
+     
       const cart = action.payload.cart;
-      const productlist = state.productlist;
-      const total = cart?.reduce((acc, cur)=> acc+productlist[cur-1]?.price, 0);
-      console.log(total);
+      let  total=0;
+      total = cart?.reduce((acc, cur)=> acc+parseInt(cur?.price), 0);
       state.total = total;
       state.cart= cart;
     },
      addToCart: function(state, action){
-      console.log("adding to cart")
+       const product = action.payload.product;
          const cart = [...state.cart];
+         console.log(cart);
          const total = state.total;
-         const id = action.payload.id
-         cart.push(id);
+         cart.push(product);
          state.cart= cart;
-         state.total = total + state.productlist[id]?.price;
+         state.total = total + parseInt(product?.price);
+         console.log(cart);
          localStorage.setItem('cart', JSON.stringify(cart));
          
      },
      removeFromCart: function(state, action){
-     const id =action.payload.id;
-      console.log("removing ", id)
+     const product =action.payload.product;
+      
       const total = state.total;
       const cart = [...state.cart];
-      const index= cart.indexOf(id);
-      cart.splice( index,1);
-       state.cart= cart;
-       state.total = total - state.productlist[id]?.price;
+      const index= cart.findIndex(p=> p.id ===product.id  );
+      cart.splice(index,1);
+      console.log("after remove ", index , cart);
+      state.cart= cart;
+       state.total = total - parseInt(product?.price);
+       console.log(cart);
        localStorage.setItem('cart', JSON.stringify(cart));
      
 
