@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { useEffect } from 'react';
+import './App.css';
+import { setProductList ,setCartList } from './store/productSlice';
+import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import NavBar from './components/NavBar';
 function App() {
+  const dispatch = useDispatch();
+  const cart = JSON.parse(localStorage.getItem('cart'));
+
+  const fetchData =async  ()=>{
+     const data = await  (await fetch ('https://fakestoreapi.com/products')).json();
+    
+    dispatch( setProductList({productlist:data}));
+     if(cart){
+       dispatch(setCartList({cart:cart}));
+     }
+  
+    }
+
+    useEffect(()=>{
+     fetchData();
+    },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar></NavBar>
+      <div className="z-10  m-2 mt-[3rem]  p-2 "><Outlet></Outlet></div>
     </div>
   );
 }
