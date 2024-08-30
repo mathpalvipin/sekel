@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sekel/static/css/main.83b1d860.css",
+    "main.js": "/sekel/static/js/main.9ee95630.js",
+    "static/js/453.6ed34f25.chunk.js": "/sekel/static/js/453.6ed34f25.chunk.js",
+    "index.html": "/sekel/index.html",
+    "main.83b1d860.css.map": "/sekel/static/css/main.83b1d860.css.map",
+    "main.9ee95630.js.map": "/sekel/static/js/main.9ee95630.js.map",
+    "453.6ed34f25.chunk.js.map": "/sekel/static/js/453.6ed34f25.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.83b1d860.css",
+    "static/js/main.9ee95630.js"
+  ]
+}
