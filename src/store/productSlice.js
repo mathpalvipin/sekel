@@ -18,12 +18,10 @@ const productsSlice = createSlice({
      addToCart: function(state, action){
        const product = action.payload.product;
          const cart = [...state.cart];
-         console.log(cart);
          const total = state.total;
          cart.push(product);
          state.cart= cart;
          state.total = total + parseInt(product?.price);
-         console.log(cart);
          localStorage.setItem('cart', JSON.stringify(cart));
          
      },
@@ -34,10 +32,8 @@ const productsSlice = createSlice({
       const cart = [...state.cart];
       const index= cart.findIndex(p=> p.id ===product.id  );
       cart.splice(index,1);
-      console.log("after remove ", index , cart);
       state.cart= cart;
        state.total = total - parseInt(product?.price);
-       console.log(cart);
        localStorage.setItem('cart', JSON.stringify(cart));
      
 
